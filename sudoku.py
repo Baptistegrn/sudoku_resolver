@@ -140,7 +140,7 @@ class JeuSudoku:
         pyxel.init(260, 120, fps=200)
         pyxel.load("sudoku.pyxres")
         pyxel.colors.from_list(PAL)
-        
+        self.resolu = False
         self.posx = 0
         self.posy = 0
         self.indicex =0
@@ -201,11 +201,12 @@ class JeuSudoku:
                     self.page = 1
                     
         if self.page == 1:
-            self.sudoku = ResolutionSudoku(self.tableau_sudoku)
-            self.sudokuoriginal = [ligne[:] for ligne in self.sudoku.sudoku]
-            self.sudokunaif, self.tempnaif = self.sudoku.algorithme_naif()
-            self.sudokuback,self.tempback= self.sudoku.backtracking()
-            
+            if not(self.resolu) :
+                self.sudoku = ResolutionSudoku(self.tableau_sudoku)
+                self.sudokuoriginal = [ligne[:] for ligne in self.sudoku.sudoku]
+                self.sudokunaif, self.tempnaif = self.sudoku.algorithme_naif()
+                self.sudokuback,self.tempback= self.sudoku.backtracking()
+                self.resolu = True
         
         if self.page == 0:
             if 110 <= pyxel.mouse_x <= 150 and 20 <= pyxel.mouse_y <= 30:
@@ -263,7 +264,7 @@ class JeuSudoku:
                 pyxel.blt(170+28, 57, 2, 0, 192, 16, 16)            
                 
 
-    def afficher_sudoku(self, sudoku, x, y):
+    def afficher_sudoku(self, sudoku, x_offset, y_offset):
         y = -8
         for ligne in sudoku:
             x = 0
