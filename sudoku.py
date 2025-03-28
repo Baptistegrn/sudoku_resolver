@@ -271,9 +271,9 @@ class JeuSudoku:
             y += 8
             for ele in ligne:
                 if isinstance(ele, int):
-                    pyxel.text(x + x_offset + 2, y + y, str(ele), 8)  
+                    pyxel.text(x + x_offset + 2, y + y_offset, str(ele), 8)  
                 elif isinstance(ele, float):  
-                    pyxel.text(x + x_offset + 2, y + y, str(int(ele)), 10)  
+                    pyxel.text(x + x_offset + 2, y + y_offset, str(int(ele)), 10)  
                 x += 8
 
 JeuSudoku()
